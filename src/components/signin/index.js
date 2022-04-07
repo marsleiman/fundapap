@@ -43,24 +43,67 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3,
   },
 });
- 
-function Login(props) {
+
+
+function Signin(props) {
   const [email, setEmail] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
   const [password, setPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [country, setCountry] = useState('');
   const { setAccessToken } = useUser();
   const { classes } = props;
  
+  async function createUser() {
+    const requestOptions = {
+      method: "POST",
+      body: JSON.stringify({
+        firstname,
+        lastname,
+        email,
+        phoneNumber,
+        country,
+        password
+      })
+    }
+
+    let response = await fetch('https://run.mocky.io/v3/c5d45ead-9ab5-4b3f-8748-65d3906d04b1', requestOptions)
+      .then((res) => res.json())
+      .catch(err => {
+          console.log("Error: ", err)
+      })
+      return response;
+  };
+
+
   function handleEmailChange(event) {
     setEmail(event.target.value);
+  }
+
+  function handleFirstname(event) {
+    setFirstname(event.target.value);
+  }
+
+  function handleLastname(event) {
+    setLastname(event.target.value);
   }
  
   function handlePasswordChange(event) {
     setPassword(event.target.value);
   }
  
+  function handlePhoneNumbere(event) {
+    setPhoneNumber(event.target.value);
+  }
+ 
+  function handleCountry(event) {
+    setCountry(event.target.value);
+  }
+ 
   function handleFormSubmit(event) {
     event.preventDefault();
- 
+    createUser();
     // Fetch the accessToken from the server
     setAccessToken('awesomeAccessToken123456789');
   } 
@@ -71,22 +114,66 @@ function Login(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Registrarse
         </Typography>
         <form className={classes.form} onSubmit={handleFormSubmit}>
           <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input
-              id="email"
-              name="email"
-              autoComplete="email"
+              <InputLabel htmlFor="firstname">Nombre</InputLabel>
+              <Input
+                id="firstname"
+                name="firstname"
+                autoComplete="firstname"
+                autoFocus
+                onChange={handleLastname}
+                value={firstname}
+              />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="lastname">Apellido</InputLabel>'
+              <Input
+              id="lastname"
+              name="lastname"
+              autoComplete="lastname"
               autoFocus
-              onChange={handleEmailChange}
-              value={email}
+              onChange={handleFirstname}
+              value={lastname}
+              />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="email">Email</InputLabel>
+              <Input
+                id="email"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                onChange={handleEmailChange}
+                value={email}
+              />
+          </FormControl>
+          <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="phoneNumber">Teléfono</InputLabel>
+              <Input
+                id="phoneNumber"
+                name="phoneNumber"
+                autoComplete="phoneNumber"
+                autoFocus
+                onChange={handlePhoneNumbere}
+                value={phoneNumber}
+              />
+            </FormControl>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="country">País</InputLabel>
+            <Input
+              name="country"
+              type="country"
+              id="country"
+              autoComplete="country"
+              onChange={handleCountry}
+              value={country}
             />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
+            <InputLabel htmlFor="password">Contraseña</InputLabel>
             <Input
               name="password"
               type="password"
@@ -101,9 +188,10 @@ function Login(props) {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            // eslint-disable-next-line no-unused-expressions
+            className={() => { classes.submit }}
           >
-            Sign in
+            Registrarse
           </Button>
         </form>
       </Paper>
@@ -111,4 +199,4 @@ function Login(props) {
   );
 }
  
-export default withStyles(styles)(Login);
+export default withStyles(styles)(Signin);
