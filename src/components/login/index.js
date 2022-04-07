@@ -49,6 +49,28 @@ function Login(props) {
   const [password, setPassword] = useState('');
   const { setAccessToken } = useUser();
   const { classes } = props;
+
+  console.log("-----------------------");
+
+  async function ingresar() {
+    console.log('llega????');
+    const requestOptions = {
+      method: "POST",
+      body: JSON.stringify({
+        /*
+          respuesta del body
+        */
+      })
+    }
+
+    let response = await fetch('https://run.mocky.io/v3/c5d45ead-9ab5-4b3f-8748-65d3906d04b1', requestOptions)
+    .then((res) => res.json())
+    .catch(err => {
+        console.log("Error: ", err)
+    })
+    console.log("-----------------------");
+    console.log(response);
+  };
  
   function handleEmailChange(event) {
     setEmail(event.target.value);
@@ -60,7 +82,9 @@ function Login(props) {
  
   function handleFormSubmit(event) {
     event.preventDefault();
- 
+    console.log('--------email', email);
+    console.log('---------password', password);
+    ingresar();
     // Fetch the accessToken from the server
     setAccessToken('awesomeAccessToken123456789');
   } 

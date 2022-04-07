@@ -4,6 +4,7 @@ import { useUser } from '../../hooks/use-user';
 
 function LogIn() {
   const { user } = useUser();
+  console.log('MARMAMEMRMAMRRMfdifshsd');
 
   return (
     <div>
