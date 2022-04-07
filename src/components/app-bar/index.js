@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useUser } from '../../hooks/use-user';
+import { Link } from "react-router-dom";
 
 /**
  * @param {string} name the name to avatar
@@ -32,7 +33,7 @@ const ResponsiveAppBar = () => {
   const pages = [
     {
       text: 'Home',
-      link: 'home',
+      link: '/home',
     },
     {
       text: 'Reunion',
@@ -112,13 +113,16 @@ const ResponsiveAppBar = () => {
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
+           <Link to={page.link}>
               <Button
+                to={page.link}
                 key={page.text}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page.text}
               </Button>
+           </Link>
             ))}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
