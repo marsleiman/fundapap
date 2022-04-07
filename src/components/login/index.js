@@ -50,16 +50,12 @@ function Login(props) {
   const { setAccessToken } = useUser();
   const { classes } = props;
 
-  console.log("-----------------------");
-
   async function ingresar() {
-    console.log('llega????');
     const requestOptions = {
       method: "POST",
-      body: JSON.stringify({
-        /*
-          respuesta del body
-        */
+      body: JSON.stringify({  
+        email,
+        password
       })
     }
 
@@ -68,8 +64,8 @@ function Login(props) {
     .catch(err => {
         console.log("Error: ", err)
     })
-    console.log("-----------------------");
-    console.log(response);
+
+    return response;
   };
  
   function handleEmailChange(event) {
@@ -82,8 +78,6 @@ function Login(props) {
  
   function handleFormSubmit(event) {
     event.preventDefault();
-    console.log('--------email', email);
-    console.log('---------password', password);
     ingresar();
     // Fetch the accessToken from the server
     setAccessToken('awesomeAccessToken123456789');
@@ -95,7 +89,7 @@ function Login(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Ingresar
         </Typography>
         <form className={classes.form} onSubmit={handleFormSubmit}>
           <FormControl margin="normal" required fullWidth>
@@ -127,7 +121,7 @@ function Login(props) {
             color="primary"
             className={classes.submit}
           >
-            Sign in
+            Ingresar
           </Button>
         </form>
       </Paper>
