@@ -1,6 +1,7 @@
 import React from 'react';
 import { useUser } from '../../hooks/use-user';
 import { ScheduleMeeting } from 'react-schedule-meeting';
+import { Navigate } from "react-router-dom";
 
 
 // MOCK agenda
@@ -27,14 +28,16 @@ const ScheduleMeetingComponent = () => {
 export default function Home() {
   const { user } = useUser();
 
-  const component = <h1>{`Hola, ${user.name}!`}</h1>;
-
-  const logeate = <h1>{`Hola, logueate maestro`}</h1>;
+  const component = 
+  <>
+    <h1>{`Hola, ${user.name}!`}</h1>
+    <ScheduleMeetingComponent />
+  </>;
 
   return (
     <div>
-      {user.name ? component : logeate}
-      <ScheduleMeetingComponent />
+      {user.name ? component : <Navigate to="/login" />
+      }
     </div>
     );
 }
