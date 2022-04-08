@@ -1,13 +1,14 @@
 import React from 'react';
 import Login from '../../components/login';
 import { useUser } from '../../hooks/use-user';
+import { Navigate } from "react-router-dom";
 
 function LogIn() {
   const { user } = useUser();
   return (
-    <div>
-      {user.name ? <h1>{`Hello, ${user.name}`}</h1> : <Login />}
-    </div>
+    <>
+      {user.name ? <Navigate to="/home" /> : <Login />}
+    </>
   );
 }
 

@@ -117,49 +117,50 @@ function Signin(props) {
           Registrarse
         </Typography>
         <form className={classes.form} onSubmit={handleFormSubmit}>
-          <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="firstname">Nombre</InputLabel>
-              <Input
-                id="firstname"
-                name="firstname"
-                autoComplete="firstname"
-                autoFocus
-                onChange={handleLastname}
-                value={firstname}
-              />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="lastname">Apellido</InputLabel>'
-              <Input
-              id="lastname"
-              name="lastname"
-              autoComplete="lastname"
-              autoFocus
-              onChange={handleFirstname}
-              value={lastname}
-              />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="email">Email</InputLabel>
-              <Input
-                id="email"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                onChange={handleEmailChange}
-                value={email}
-              />
+        <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="firstname">Nombre</InputLabel>
+            <Input
+            id="firstname"
+            name="firstname"
+            autoComplete="firstname"
+            autoFocus
+            onChange={handleFirstname}
+            value={firstname}
+            />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="phoneNumber">Teléfono</InputLabel>
-              <Input
-                id="phoneNumber"
-                name="phoneNumber"
-                autoComplete="phoneNumber"
-                autoFocus
-                onChange={handlePhoneNumbere}
-                value={phoneNumber}
-              />
+            <InputLabel htmlFor="lastname">Apellido</InputLabel>
+            <Input
+            id="lastname"
+            name="lastname"
+            autoComplete="lastname"
+            autoFocus
+            onChange={handleLastname}
+            value={lastname}
+            />
+          </FormControl>
+          <FormControl margin="normal" required fullWidth>
+          <InputLabel htmlFor="email">Email</InputLabel>
+          <Input
+            id="email"
+            name="email"
+            autoComplete="email"
+            autoFocus
+            onChange={handleEmailChange}
+            value={email}
+            />
+          </FormControl>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="phoneNumber">Teléfono</InputLabel>
+            <Input
+              id="phoneNumber"
+              name="phoneNumber"
+              autoComplete="phoneNumber"
+              autoFocus
+              onChange={handlePhoneNumbere}
+              value={phoneNumber}
+              rows="number"
+            />
             </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="country">País</InputLabel>
@@ -188,8 +189,7 @@ function Signin(props) {
             fullWidth
             variant="contained"
             color="primary"
-            // eslint-disable-next-line no-unused-expressions
-            className={() => { classes.submit }}
+            className={`${classes.submit} login__principal-buton`}
           >
             Registrarse
           </Button>

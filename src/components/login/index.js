@@ -11,6 +11,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React, { useState } from 'react';
 import { useUser } from '../../hooks/use-user';
+import { Link } from '@mui/material';
 
 const styles = theme => ({
   main: {
@@ -118,12 +119,17 @@ function Login(props) {
             type="submit"
             fullWidth
             variant="contained"
-            color="primary"
-            className={classes.submit}
+            className={`${classes.submit} login__principal-buton`}
           >
             Ingresar
           </Button>
         </form>
+        <Link className="login__link" href="/donde?" underline="always">
+          {'¿Olvidaste tu contraseña?'}
+        </Link>
+        <Link className="login__link" href="signin" underline="always">
+          {'Crear cuenta'}
+        </Link>
       </Paper>
     </main>
   );

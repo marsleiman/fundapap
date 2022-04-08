@@ -10,3 +10,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.MuiAvatar-root.MuiAvatar-circular.MuiAvatar-colorDefault {
+  background-color: $secun-color!important;
+}
