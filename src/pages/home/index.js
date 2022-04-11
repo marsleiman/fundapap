@@ -34,10 +34,16 @@ export default function Home() {
     <ScheduleMeetingComponent />
   </>;
 
+  const buttomCustom = 
+  <>
+    <h2>{`Hola, ${user.name}!`}</h2>
+    <span>{`Ya podés sumarte a la reunión del día de hoy`}</span>
+    <a>'link'</a>
+  </>;
+
   return (
     <div>
-      {user.name ? component : <Navigate to="/login" />
-      }
+      {user.name ? buttomCustom : <Navigate to="/login" />}
     </div>
     );
 }
