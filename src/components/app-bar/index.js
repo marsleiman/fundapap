@@ -33,7 +33,7 @@ const ResponsiveAppBar = () => {
       func: () => window.location.href = '/user',
     },
     {
-      text: 'Home',
+      text: 'Inicio',
       func: () => window.location.href = '/home',
     },
     {

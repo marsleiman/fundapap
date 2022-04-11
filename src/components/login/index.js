@@ -94,7 +94,7 @@ function Login(props) {
         </Typography>
         <form className={classes.form} onSubmit={handleFormSubmit}>
           <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
+            <InputLabel htmlFor="email">Email</InputLabel>
             <Input
               id="email"
               name="email"
@@ -105,7 +105,7 @@ function Login(props) {
             />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
+            <InputLabel htmlFor="password">Contraseña</InputLabel>
             <Input
               name="password"
               type="password"
@@ -124,9 +124,9 @@ function Login(props) {
             Ingresar
           </Button>
         </form>
-        <Link className="login__link" href="/donde?" underline="always">
+        {/* <Link className="login__link" href="/donde?" underline="always">
           {'¿Olvidaste tu contraseña?'}
-        </Link>
+        </Link> */}
         <Link className="login__link" href="signin" underline="always">
           {'Crear cuenta'}
         </Link>
