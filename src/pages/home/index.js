@@ -34,11 +34,38 @@ export default function Home() {
     <ScheduleMeetingComponent />
   </>;
 
-  const buttomCustom = 
+  /* Debería ser la data real
+  async function createUser() {
+    const requestOptions = {
+      method: "POST",
+      body: JSON.stringify({
+        firstname,
+        lastname,
+        email,
+        phoneNumber,
+        country,
+        password
+      })
+    }
+
+    let response = await fetch('https://run.mocky.io/v3/c5d45ead-9ab5-4b3f-8748-65d3906d04b1', requestOptions)
+      .then((res) => res.json())
+      .catch(err => {
+          console.log("Error: ", err)
+      })
+      return response;
+  };
+  */
+
+  const bodyHome = <div>    
+      <h2>{`Hola, ${user.name}!`}</h2>
+      <span>{`Ya podés sumarte a la reunión del día de hoy`}</span>
+      <a>'link'</a>;
+    </div>
+
+  const buttomCustom = (paramA) =>
   <>
-    <h2>{`Hola, ${user.name}!`}</h2>
-    <span>{`Ya podés sumarte a la reunión del día de hoy`}</span>
-    <a>'link'</a>
+    {paramA ? bodyHome : 'No hay una reunion actualmente'}
   </>;
 
   return (
