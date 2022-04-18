@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React, { useState } from 'react';
 import { useUser } from '../../hooks/use-user';
 import { Link } from '@mui/material';
+import {login} from '../../services';
 
 const styles = theme => ({
   main: {
@@ -52,21 +53,11 @@ function Login(props) {
   const { classes } = props;
 
   async function ingresar() {
-    const requestOptions = {
-      method: "POST",
-      body: JSON.stringify({  
-        email,
-        password
-      })
-    }
-
-    let response = await fetch('https://run.mocky.io/v3/c5d45ead-9ab5-4b3f-8748-65d3906d04b1', requestOptions)
-    .then((res) => res.json())
-    .catch(err => {
-        console.log("Error: ", err)
-    })
-
-    return response;
+    login(email, password, (data) => {
+      if(data.api_key !== undefined){
+        setAccessToken(data.api_key);
+      }
+    });
   };
  
   function handleEmailChange(event) {
@@ -80,8 +71,7 @@ function Login(props) {
   function handleFormSubmit(event) {
     event.preventDefault();
     ingresar();
-    // Fetch the accessToken from the server
-    setAccessToken('awesomeAccessToken123456789');
+
   } 
   return (
     <main className={classes.main}>

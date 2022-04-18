@@ -11,6 +11,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React, { useState } from 'react';
 import { useUser } from '../../hooks/use-user';
+import { signin as signinCall } from '../../services';
 
 const styles = theme => ({
   main: {
@@ -56,24 +57,9 @@ function Signin(props) {
   const { classes } = props;
  
   async function createUser() {
-    const requestOptions = {
-      method: "POST",
-      body: JSON.stringify({
-        firstname,
-        lastname,
-        email,
-        phoneNumber,
-        country,
-        password
-      })
-    }
+    signinCall(firstname, lastname, email, password, phoneNumber, country, (data) => {
 
-    let response = await fetch('https://run.mocky.io/v3/c5d45ead-9ab5-4b3f-8748-65d3906d04b1', requestOptions)
-      .then((res) => res.json())
-      .catch(err => {
-          console.log("Error: ", err)
-      })
-      return response;
+    });
   };
 
 
@@ -104,8 +90,6 @@ function Signin(props) {
   function handleFormSubmit(event) {
     event.preventDefault();
     createUser();
-    // Fetch the accessToken from the server
-    setAccessToken('awesomeAccessToken123456789');
   } 
   return (
     <main className={classes.main}>
