@@ -7,7 +7,7 @@ function SignIn() {
 
   return (
     <div>
-      {user.name ? <h1>{`Hello, ${user.name}`}</h1> : <Signin />}
+      {user && user.name ? <h1>{`Hello, ${user.name}`}</h1> : <Signin />}
     </div>
   );
 }

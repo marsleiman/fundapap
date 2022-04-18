@@ -7,7 +7,7 @@ function LogIn() {
   const { user } = useUser();
   return (
     <>
-      {user.name ? <Navigate to="/home" /> : <Login />}
+      {user && user.name ? <Navigate to="/home" /> : <Login />}
     </>
   );
 }

@@ -50,12 +50,14 @@ function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { setAccessToken } = useUser();
+  const { setUser } = useUser();
   const { classes } = props;
 
   async function ingresar() {
     login(email, password, (data) => {
-      if(data.api_key !== undefined){
+      if(data.status === "success"){
         setAccessToken(data.api_key);
+        setUser({name: data.firstname + " " + data.lastname});
       }
     });
   };
