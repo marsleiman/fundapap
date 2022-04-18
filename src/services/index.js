@@ -52,7 +52,9 @@ export const logout = async (api_token, callback) => {
 
     const fetchData = {
         method: "GET",
-        authorization: "bearer " + api_token
+        headers: {
+            'Authorization': "Bearer " + api_token,
+        },
     }
 
     return await fetch( url, fetchData
@@ -68,7 +70,9 @@ export const meetingHistory = async (api_token, callback) => {
 
     const fetchData = {
         method: "GET",
-        authorization: "bearer " + api_token
+        headers: {
+            'Authorization': "Bearer " + api_token,
+        },
     }
 
     return await fetch( url, fetchData
@@ -84,7 +88,9 @@ export const nextMeetings = async (api_token, callback) => {
 
     const fetchData = {
         method: "GET",
-        authorization: "bearer " + api_token
+        headers: {
+            'Authorization': "Bearer " + api_token,
+        },
     }
 
     return await fetch( url, fetchData
@@ -100,7 +106,9 @@ export const getMeeting = async (api_token, id, callback) => {
 
     const fetchData = {
         method: "GET",
-        authorization: "bearer " + api_token
+        headers: {
+            'Authorization': "Bearer " + api_token,
+        },
     }
 
     return await fetch( url, fetchData
