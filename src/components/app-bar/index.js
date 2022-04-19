@@ -30,12 +30,12 @@ const ResponsiveAppBar = () => {
 
   const settings = [
     {
-      text: 'Usuario',
-      func: () => window.location.href = '/user',
-    },
-    {
       text: 'Inicio',
       func: () => window.location.href = '/home',
+    },
+    {
+      text: 'Perfil',
+      func: () => window.location.href = '/user',
     },
     {
       text: 'Cerrar sesión',
