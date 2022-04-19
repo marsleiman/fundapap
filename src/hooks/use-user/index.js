@@ -12,11 +12,11 @@ export function UserProvider({ children }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
  
   function handleAccessTokenChange() {
-    /*if (!user.name && accessToken) {
+    console.log('------------useruseruseruseruseruser', user);
+    if (!user && accessToken) {
       localStorage.setItem('access_token', accessToken);
-      const user = getCurrentUser(accessToken);
       setUser(user);
-    } else */if (!accessToken) {
+    } else if (!accessToken) {
       // Log Out
       localStorage.removeItem('access_token');
       setUser({});
