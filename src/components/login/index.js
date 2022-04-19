@@ -57,7 +57,10 @@ function Login(props) {
     login(email, password, (data) => {
       if(data.status === "success"){
         setAccessToken(data.api_key);
-        setUser({name: data.firstname + " " + data.lastname});
+        let userLog = {
+          name: `${data.firstname} ${data.lastname}`,
+        }
+        setUser(userLog);
       }
     });
   };

@@ -2,7 +2,7 @@ export const serverUrl = "https://api.reuniones.fundapap.org/api/v1/";
 //export const serverUrl = "http://localhost:8000/api/v1/";
 
 export const login = async (email, password, callback) => {
-    let url = serverUrl + "user/login";
+    let url = `${serverUrl}user/login`;
 
     const data = {
         email,

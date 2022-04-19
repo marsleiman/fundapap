@@ -9,27 +9,25 @@ const UserContext = createContext(initialState);
  
 export function UserProvider({ children }) {
   const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token'));
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+  const [user, setUser] = useState(localStorage.getItem('user'));
  
   function handleAccessTokenChange() {
-    console.log('------------useruseruseruseruseruser', user);
     if (!user && accessToken) {
       localStorage.setItem('access_token', accessToken);
-      setUser(user);
+      localStorage.setItem('user', user);
     } else if (!accessToken) {
       // Log Out
       localStorage.removeItem('access_token');
       setUser({});
-      localStorage.removeItem('user');
     }
   }
  
   useEffect(() => {
     handleAccessTokenChange();
-  }, [accessToken]);
+  }, [user, accessToken]);
  
   return (
-    <UserContext.Provider value={{ user, setUser, accessToken, setAccessToken }}>
+    <UserContext.Provider value={{ user, accessToken, setAccessToken, setUser }}>
       {children}
     </UserContext.Provider>
   );
