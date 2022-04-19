@@ -13,7 +13,7 @@ import React, { useState } from 'react';
 import { useUser } from '../../hooks/use-user';
 import { signin as signinCall } from '../../services';
 import MenuItem from "@mui/material/MenuItem";
-import {Select} from "@mui/material";
+import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Select} from "@mui/material";
 
 const styles = theme => ({
   main: {
@@ -54,16 +54,31 @@ function Signin(props) {
   const [lastname, setLastname] = useState('');
   const [password, setPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [country, setCountry] = useState('');
+  const [country, setCountry] = useState('AR');
   const { setAccessToken } = useUser();
   const { classes } = props;
- 
-  async function createUser() {
-    signinCall(firstname, lastname, email, password, phoneNumber, country, (data) => {
+  const [error, setError] = useState('');
+  const [open, setOpen] = React.useState(false);
 
-    });
+  const handleClose = () => {
+    setOpen(false);
   };
 
+  async function createUser() {
+    signinCall(firstname, lastname, email, password, phoneNumber, country, (data) => {
+      if (!data || !data.id) {
+        let errors = Object.keys(data);
+        if (errors.length === 1) {
+          setError("El campo " + Object.keys(data).join() + " no es válido");
+        } else {
+          setError("Los campos " + Object.keys(data).join() + " no son válidos");
+        }
+        setOpen(true);
+      } else {
+        // Se registro correctamente y lo llevo a login
+      }
+    });
+  };
 
   function handleEmailChange(event) {
     setEmail(event.target.value);
@@ -150,17 +165,10 @@ function Signin(props) {
             </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="country">País</InputLabel>
-            <Input
-              name="country"
-              type="country"
-              id="country"
-              autoComplete="country"
-              onChange={handleCountry}
-              value={country}
-            />
             <Select name="country"
                     type="country"
                     id="country"
+                    input={<Input />}
                     autoComplete="country"
                     onChange={handleCountry}
                     value={country}
@@ -423,6 +431,24 @@ function Signin(props) {
           </Button>
         </form>
       </Paper>
+      <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Atención"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {`${error}`}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            Cerrar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </main>
   );
 }
