@@ -10,20 +10,21 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useUser } from '../../hooks/use-user';
+import {logout} from "../../services";
 
 /**
  * @param {string} name the name to avatar
  */
 
 const ResponsiveAppBar = () => {
-  const { user, setAccessToken } = useUser();
+  const { user, accessToken, setAccessToken } = useUser();
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
   const handleCloseLogerMenu = () => {
-    setAccessToken(null);
+    logout(accessToken, (data) => setAccessToken(null));
     handleCloseUserMenu();
   };
 
@@ -37,7 +38,7 @@ const ResponsiveAppBar = () => {
       func: () => window.location.href = '/home',
     },
     {
-      text: 'Salir',
+      text: 'Cerrar sesión',
       func: () => handleCloseLogerMenu(),
     },
   ];

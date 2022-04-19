@@ -11,7 +11,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React, { useState } from 'react';
 import { useUser } from '../../hooks/use-user';
-import { Link } from '@mui/material';
+import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Link} from '@mui/material';
 import {login} from '../../services';
 
 const styles = theme => ({
@@ -47,11 +47,17 @@ const styles = theme => ({
 });
  
 function Login(props) {
+  const [error, setError] = useState(undefined);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [open, setOpen] = React.useState(false);
   const { setAccessToken } = useUser();
   const { setUser } = useUser();
   const { classes } = props;
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   function ingresar() {
     login(email, password, (data) => {
@@ -61,6 +67,13 @@ function Login(props) {
           name: `${data.firstname} ${data.lastname}`,
         }
         setUser(userLog);
+        setError(undefined);
+      } else if (data.status === "fail") {
+        setError("El email y/o el password ingresado es incorrecto");
+        setOpen(true);
+      } else {
+        setError("Por favor ingrese un email válido");
+        setOpen(true);
       }
     });
   }
@@ -76,7 +89,6 @@ function Login(props) {
   function handleFormSubmit(event) {
     event.preventDefault();
     ingresar();
-
   } 
   return (
     <main className={classes.main}>
@@ -126,6 +138,24 @@ function Login(props) {
           {'Crear cuenta'}
         </Link>
       </Paper>
+      <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Atención"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {`${error}`}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            Cerrar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </main>
   );
 }
