@@ -21,7 +21,7 @@ function App() {
             <Route path='/login' element={<LogIn />} />
             <Route path='/signin' element={<SignIn />} />
             <Route path='/user' element={<User />} />
-            <Route path='/meet' element={<Meet />} />
+            <Route path='/meet/:uuid' element={<Meet />} />
           </Routes>
         </div>
         </UserProvider>

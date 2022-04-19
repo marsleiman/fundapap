@@ -36,7 +36,7 @@ export default function Home() {
         let current = apiData.current[0];
         meetingMessage = <div>
           <h3>{current.title}</h3>
-          <h4>'Puedes unirte a la reunión en curso presionando aquí'</h4>
+          <h4>Puedes unirte a la reunión en curso presionando aquí</h4>
           <Button variant="contained" color="primary" href={`/meet/${current.code}`}>
             Ir a la reunión
           </Button>
@@ -81,7 +81,7 @@ export default function Home() {
       return <>
         <div style={{margin: '10px', backgroundColor: indigo[700], color: blueGrey[50], padding: '5px'}}>
           <p style={{padding: '5px'}}>{meetingMessage}</p>
-        </div>;
+        </div>
         <div>
           <h2>Revisa nuestro calendario para ver las siguientes reuniones</h2>
           {nextMeetings}

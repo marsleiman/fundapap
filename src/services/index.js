@@ -102,7 +102,7 @@ export const nextMeetings = async (api_token, callback) => {
 }
 
 export const getMeeting = async (api_token, id, callback) => {
-    let url = serverUrl + "/meeting/" + id;
+    let url = serverUrl + "meeting/" + id;
 
     const fetchData = {
         method: "GET",
