@@ -53,7 +53,7 @@ function Login(props) {
   const { setUser } = useUser();
   const { classes } = props;
 
-  async function ingresar() {
+  function ingresar() {
     login(email, password, (data) => {
       if(data.status === "success"){
         setAccessToken(data.api_key);
@@ -63,7 +63,7 @@ function Login(props) {
         setUser(userLog);
       }
     });
-  };
+  }
  
   function handleEmailChange(event) {
     setEmail(event.target.value);
