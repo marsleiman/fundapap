@@ -3,31 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useUser } from '../../hooks/use-user';
 import {useParams} from "react-router-dom";
 import {getMeeting} from "../../services";
-import {Button, TableCell, TablePagination} from "@mui/material";
-import TableContainer from "@material-ui/core/TableContainer";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableBody from "@material-ui/core/TableBody";
+import {Button} from "@mui/material";
 import Loading from "../../components/loading";
-
-const useStyles = makeStyles({
-  root: {
-    width: '100%',
-  },
-  container: {
-    maxHeight: 440,
-  },
-});
+import DataTable from "../../components/dataTable";
 
 function Meet() {
-  const classes = useStyles();
   const { user, accessToken } = useUser();
   const { uuid } = useParams();
   const [apiData, setApiData] = useState();
-
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   useEffect(() => {
     if (uuid) {
@@ -39,14 +22,6 @@ function Meet() {
     }
   }, []);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
 
   if (!user && !user.name) {
     return ''
@@ -84,43 +59,21 @@ function Meet() {
       let organizers = apiData.users.organizer.map(
             (elem) => { return { category: "Organizador", name: elem.firstname + " " + elem.lastname }}
         );
-      console.log(organizers);
 
+      let header = [
+        {
+          id: 'category',
+          title: 'Categoría'
+        },
+        {
+          id: 'name',
+          title: 'Nombre'
+        }
+      ]
       let rows = [...newusers, ...participants, ...organizers];
+      let title = "Participantes";
 
-      users = <>
-        <TableContainer className={classes.container}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                <TableCell align={"center"}>Categoria</TableCell>
-                <TableCell align={"center"}>Nombre</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                return (
-                    <TableRow hover key={row.name}>
-                      <TableCell align="left">{row.category}</TableCell>
-                      <TableCell align="left">{row.name}</TableCell>
-                    </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-            labelRowsPerPage={"Filas por página:"}
-            labelDisplayedRows={({ from, to, count }) => `${from}-${to} de ${count}`}
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </>
+      users = <DataTable title={title} columns={header} data={rows} />;
     }
 
     return <>
