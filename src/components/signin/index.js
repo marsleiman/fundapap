@@ -9,11 +9,12 @@ import {
 } from '@material-ui/core';
 import withStyles from '@material-ui/core/styles/withStyles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import React, { useState } from 'react';
 import { useUser } from '../../hooks/use-user';
 import { signin as signinCall } from '../../services';
-import MenuItem from "@mui/material/MenuItem";
-import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Select} from "@mui/material";
+import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@material-ui/core";
 
 const styles = theme => ({
   main: {
@@ -91,23 +92,23 @@ function Signin(props) {
   function handleLastname(event) {
     setLastname(event.target.value);
   }
- 
+
   function handlePasswordChange(event) {
     setPassword(event.target.value);
   }
- 
+
   function handlePhoneNumbere(event) {
     setPhoneNumber(event.target.value);
   }
- 
+
   function handleCountry(event) {
     setCountry(event.target.value);
   }
- 
+
   function handleFormSubmit(event) {
     event.preventDefault();
     createUser();
-  } 
+  }
   return (
     <main className={classes.main}>
       <Paper className={classes.paper}>
@@ -437,14 +438,14 @@ function Signin(props) {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Atención"}</DialogTitle>
+        <DialogTitle className={'dialog-title'} id="alert-dialog-title">{"Atención"}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText className={'dialog-content'}  id="alert-dialog-description">
             {`${error}`}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button className={'dialog-button'} onClick={handleClose} autoFocus>
             Cerrar
           </Button>
         </DialogActions>

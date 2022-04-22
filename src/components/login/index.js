@@ -144,14 +144,14 @@ function Login(props) {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Atención"}</DialogTitle>
+        <DialogTitle className={'dialog-title'} id="alert-dialog-title">{"Atención"}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+          <DialogContentText className={'dialog-content'} id="alert-dialog-description">
             {`${error}`}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button className={'dialog-button'} onClick={handleClose} autoFocus>
             Cerrar
           </Button>
         </DialogActions>
