@@ -15,6 +15,7 @@ import React, { useState } from 'react';
 import { useUser } from '../../hooks/use-user';
 import { signin as signinCall } from '../../services';
 import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@material-ui/core";
+import { Navigate } from "react-router-dom";
 
 const styles = theme => ({
   main: {
@@ -54,12 +55,14 @@ function Signin(props) {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [password, setPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [country, setCountry] = useState('AR');
   const { setAccessToken } = useUser();
   const { classes } = props;
   const [error, setError] = useState('');
   const [open, setOpen] = React.useState(false);
+  const [goToLogin, setGoToLogin] = React.useState(false);
 
   const handleClose = () => {
     setOpen(false);
@@ -77,6 +80,7 @@ function Signin(props) {
         setOpen(true);
       } else {
         // Se registro correctamente y lo llevo a login
+        setGoToLogin(true);
       }
     });
   };
@@ -84,7 +88,6 @@ function Signin(props) {
   function handleEmailChange(event) {
     setEmail(event.target.value);
   }
-
   function handleFirstname(event) {
     setFirstname(event.target.value);
   }
@@ -97,8 +100,15 @@ function Signin(props) {
     setPassword(event.target.value);
   }
 
-  function handlePhoneNumbere(event) {
-    setPhoneNumber(event.target.value);
+  function handleRepeatedPasswordChange(event) {
+    setRepeatPassword(event.target.value);
+  }
+
+  function handlePhoneNumber(event) {
+    const re = /^[0-9,\-,+, ]+$/g;
+    if (event.target.value === '' || re.test(event.target.value)) {
+      setPhoneNumber(event.target.value);
+    }
   }
 
   function handleCountry(event) {
@@ -107,8 +117,18 @@ function Signin(props) {
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    createUser();
+    if (password === repeatPassword) {
+      createUser();
+    } else {
+      setError("El campo Contraseña y Repetir Contraseña no coinciden");
+      setOpen(true);
+    }
   }
+
+  if (goToLogin) {
+    return <Navigate to="/login"/>
+  }
+
   return (
     <main className={classes.main}>
       <Paper className={classes.paper}>
@@ -159,7 +179,7 @@ function Signin(props) {
               name="phoneNumber"
               autoComplete="phoneNumber"
               autoFocus
-              onChange={handlePhoneNumbere}
+              onChange={handlePhoneNumber}
               value={phoneNumber}
               rows="number"
             />
@@ -419,6 +439,18 @@ function Signin(props) {
               autoComplete="current-password"
               onChange={handlePasswordChange}
               value={password}
+            />
+          </FormControl>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="repeat-password">Repetir Contraseña</InputLabel>
+            <Input
+                error={(repeatPassword !== password)}
+                name="repeat-password"
+                type="password"
+                id="repeat-password"
+                autoComplete="password"
+                onChange={handleRepeatedPasswordChange}
+                value={repeatPassword}
             />
           </FormControl>
           <Button

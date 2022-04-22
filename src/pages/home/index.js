@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react';
 import { useUser } from '../../hooks/use-user';
 import { Navigate } from "react-router-dom";
 import {nextMeetings} from "../../services";
-import {Button} from "@mui/material";
-import {blueGrey, indigo} from "@mui/material/colors";
 import Loading from "../../components/loading";
 import Highlight from "./highlight";
 import Calendar from "./calendar";
