@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import { useUser } from '../../hooks/use-user';
-import { ScheduleMeeting } from 'react-schedule-meeting';
 import { Navigate } from "react-router-dom";
 import {nextMeetings} from "../../services";
-import {Button, CircularProgress} from "@mui/material";
+import {Button} from "@mui/material";
 import {blueGrey, indigo} from "@mui/material/colors";
+import Loading from "../../components/loading";
 
 
 export default function Home() {
@@ -22,9 +22,7 @@ export default function Home() {
     if (!user && !user.name) { //No esta logueado
       return <Navigate to="/login"/>
     } else if (apiData === undefined) { // Aun no cargo la api y hay que esperar
-      return <div style={{margin: '10px', backgroundColor: indigo[700], color: blueGrey[50], padding: '5px'}}>
-        <h3 style={{padding: '5px'}}><CircularProgress size="1rem"/> Cargando datos</h3>
-      </div>;
+      return <Loading />
     } else { //Ya esta la data de la api
 
       // Actual meeting

@@ -3,13 +3,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useUser } from '../../hooks/use-user';
 import {useParams} from "react-router-dom";
 import {getMeeting} from "../../services";
-import {blueGrey, indigo} from "@mui/material/colors";
-import {Button, CircularProgress, TableCell, TablePagination} from "@mui/material";
+import {Button, TableCell, TablePagination} from "@mui/material";
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
+import Loading from "../../components/loading";
 
 const useStyles = makeStyles({
   root: {
@@ -51,9 +51,7 @@ function Meet() {
   if (!user && !user.name) {
     return ''
   } else  if (apiData === undefined) { // Aun no cargo la api y hay que esperar
-    return <div style={{margin: '10px', backgroundColor: indigo[700], color: blueGrey[50], padding: '5px'}}>
-      <h3 style={{padding: '5px'}}><CircularProgress size="1rem"/> Cargando datos</h3>
-    </div>;
+    return <Loading />
   } else { //Ya esta la data de la api
 
     //Meeting
