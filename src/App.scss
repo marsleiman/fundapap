@@ -1,6 +1,8 @@
 @import '_variables.scss',
         'components/app-bar/index.scss',
-        'components/loading/index.scss';
+        'components/loading/index.scss',
+        'pages/home/highlight/index.scss',
+        'pages/home/calendar/index.scss';
 
 body {
   margin: 0 auto;

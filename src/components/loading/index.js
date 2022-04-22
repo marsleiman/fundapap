@@ -1,5 +1,4 @@
 import React from 'react';
-import {blueGrey, indigo} from "@mui/material/colors";
 import {CircularProgress} from "@mui/material";
 
 function Loading() {

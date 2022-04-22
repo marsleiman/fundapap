@@ -5,6 +5,8 @@ import {nextMeetings} from "../../services";
 import {Button} from "@mui/material";
 import {blueGrey, indigo} from "@mui/material/colors";
 import Loading from "../../components/loading";
+import Highlight from "./highlight";
+import Calendar from "./calendar";
 
 
 export default function Home() {
@@ -28,23 +30,24 @@ export default function Home() {
       // Actual meeting
       let meetingMessage;
       if (apiData.current && apiData.current.length === 0) {
-        meetingMessage = `Actualmente no hay ninguna reunión en curso, revisa el calendario y recuerda que podrás ingresar a partir de ${apiData.time_before} minutos antes.`;
+        let title = `Actualmente no hay ninguna reunión en curso`;
+        let subtitle = `Encontrarás el link para ingresar aqui, a partir de ${apiData.time_before} minutos antes del inicio.`;
+        meetingMessage = <Highlight title={title} subtitle={subtitle} />;
       } else {
         // Textos de current meet
         let current = apiData.current[0];
-        meetingMessage = <div>
-          <h3>{current.title}</h3>
-          <h4>Puedes unirte a la reunión en curso presionando aquí</h4>
-          <Button variant="contained" color="primary" href={`/meet/${current.code}`}>
-            Ir a la reunión
-          </Button>
-        </div>
+        meetingMessage = <Highlight title={current.title} subtitle={'Puedes unirte a la reunión presionando en el siguiente boton'}
+          button={{
+            text: "Ir a la reunión",
+            href: `/meet/${current.code}`,
+          }}
+        />
       }
 
       //nextMeetings
       let nextMeetings;
       if (apiData.next.length > 0) {
-
+        nextMeetings = <Calendar nexts={apiData.next}/>
         // Calendar
         /*
         const availableTimeslots = apiData.next.map((e) => {
@@ -68,22 +71,18 @@ export default function Home() {
         */
 
         // Lista de meetings
+        /*
         nextMeetings = apiData.next.map((elem) =>
               <div style={{margin: '10px', backgroundColor: indigo[700], color: blueGrey[50], padding: '5px'}}>
                 <p style={{padding: '5px'}}>{elem.title}</p>
               </div>
-        );
+        );*/
       }
 
       // Maqueta del contenido
       return <>
-        <div style={{margin: '10px', backgroundColor: indigo[700], color: blueGrey[50], padding: '5px'}}>
-          <p style={{padding: '5px'}}>{meetingMessage}</p>
-        </div>
-        <div>
-          <h2>Revisa nuestro calendario para ver las siguientes reuniones</h2>
-          {nextMeetings}
-        </div>
+        {meetingMessage}
+        {nextMeetings}
       </>
     }
   }
