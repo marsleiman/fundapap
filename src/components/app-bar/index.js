@@ -11,6 +11,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useUser } from '../../hooks/use-user';
 import {logout} from "../../services";
+import { useNavigate } from 'react-router-dom';
 
 /**
  * @param {string} name the name to avatar
@@ -18,13 +19,14 @@ import {logout} from "../../services";
 
 const ResponsiveAppBar = () => {
   const { user, accessToken, setAccessToken } = useUser();
+  const navigate = useNavigate()
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
   const handleCloseLogerMenu = () => {
-    logout(accessToken, (data) => setAccessToken(null));
+    logout(accessToken, (data) => {setAccessToken(null); navigate("/login");});
     handleCloseUserMenu();
   };
 

@@ -1,6 +1,7 @@
 {
   "name": "fundapap",
   "version": "0.1.0",
+  "homepage": "https://reuniones.fundapap.org",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.8.2",
