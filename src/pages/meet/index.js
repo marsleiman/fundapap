@@ -22,7 +22,7 @@ function Meet() {
   }, []);
 
 
-  if (!user && !user.name) {
+  if (!user || !user.name) {
     return ''
   } else  if (apiData === undefined) { // Aun no cargo la api y hay que esperar
     return <Loading />
