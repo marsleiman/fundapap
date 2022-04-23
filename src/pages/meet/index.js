@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { useUser } from '../../hooks/use-user';
 import {useParams} from "react-router-dom";
 import {getMeeting} from "../../services";

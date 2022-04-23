@@ -12,10 +12,13 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import React, { useState } from 'react';
-import { useUser } from '../../hooks/use-user';
 import { signin as signinCall } from '../../services';
 import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@material-ui/core";
 import { Navigate } from "react-router-dom";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
 
 const styles = theme => ({
   main: {
@@ -58,10 +61,10 @@ function Signin(props) {
   const [repeatPassword, setRepeatPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [country, setCountry] = useState('AR');
-  const { setAccessToken } = useUser();
   const { classes } = props;
   const [error, setError] = useState('');
   const [open, setOpen] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
   const [goToLogin, setGoToLogin] = React.useState(false);
 
   const handleClose = () => {
@@ -117,13 +120,24 @@ function Signin(props) {
 
   function handleFormSubmit(event) {
     event.preventDefault();
-    if (password === repeatPassword) {
+    if (password.length >= 6 && password === repeatPassword) {
       createUser();
-    } else {
+    } else if (!(password === repeatPassword)) {
       setError("El campo Contraseña y Repetir Contraseña no coinciden");
+      setOpen(true);
+    } else if (password.length <= 6) {
+      setError("La contraseña debe tener por lo menos seis caracteres");
       setOpen(true);
     }
   }
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   if (goToLogin) {
     return <Navigate to="/login"/>
@@ -434,11 +448,22 @@ function Signin(props) {
             <InputLabel htmlFor="password">Contraseña</InputLabel>
             <Input
               name="password"
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               id="password"
               autoComplete="current-password"
               onChange={handlePasswordChange}
               value={password}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
             />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
@@ -446,11 +471,22 @@ function Signin(props) {
             <Input
                 error={(repeatPassword !== password)}
                 name="repeat-password"
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 id="repeat-password"
                 autoComplete="password"
                 onChange={handleRepeatedPasswordChange}
                 value={repeatPassword}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
             />
           </FormControl>
           <Button

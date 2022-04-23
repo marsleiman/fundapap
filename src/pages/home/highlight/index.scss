@@ -4,7 +4,6 @@
   background-image: linear-gradient(90deg, rgb(238, 120, 229) 0%, rgb(153, 50, 148) 100%);
   color: $white-color;
   width: 100%;
-  //max-width: 1400px;
   margin: auto;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -12,15 +11,6 @@
 
 .parent_h_highlight {
   padding: 5px;
-
-}
-
-.child_h3_highlight {
-  //padding: 5px;
-}
-
-.child_h4_highlight {
-  //padding: 5px;
 }
 
 .button_highlight {
@@ -28,7 +18,5 @@
   border-radius: 100px !important;
   text-transform: uppercase;
   background-color: $main-color !important;
-  //letter-spacing: 2px !important;
   margin: 10px !important;
-  //font-size: 13px !important;
 }

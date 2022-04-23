@@ -144,7 +144,12 @@ function Login(props) {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
       >
-        <DialogTitle className={'dialog-title'} id="alert-dialog-title">{"Atención"}</DialogTitle>
+        <DialogTitle
+          className={'dialog-title'}
+          id="alert-dialog-title"
+          >
+            {"Atención"}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText className={'dialog-content'} id="alert-dialog-description">
             {`${error}`}
