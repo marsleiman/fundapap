@@ -12,14 +12,20 @@ export function UserProvider({ children }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
  
   function handleAccessTokenChange() {
-    /*if (!user.name && accessToken) {
+    if (accessToken) {
       localStorage.setItem('access_token', accessToken);
-      const user = getCurrentUser(accessToken);
-      setUser(user);
-    } else */if (!accessToken) {
-      // Log Out
+    } else {
       localStorage.removeItem('access_token');
       setUser({});
+    }
+  }
+
+  function handleUserChange() {
+    if (user && user.name) {
+      localStorage.setItem('user', JSON.stringify(user));
+      //localStorage.setItem('user', user);
+    } else {
+      // Log Out
       localStorage.removeItem('user');
     }
   }
@@ -27,9 +33,13 @@ export function UserProvider({ children }) {
   useEffect(() => {
     handleAccessTokenChange();
   }, [accessToken]);
+
+  useEffect(() => {
+    handleUserChange();
+  }, [user]);
  
   return (
-    <UserContext.Provider value={{ user, setUser, accessToken, setAccessToken }}>
+    <UserContext.Provider value={{ user, accessToken, setAccessToken, setUser }}>
       {children}
     </UserContext.Provider>
   );

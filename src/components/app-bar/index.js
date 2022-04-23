@@ -10,34 +10,37 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useUser } from '../../hooks/use-user';
+import {logout} from "../../services";
+import { useNavigate } from 'react-router-dom';
 
 /**
  * @param {string} name the name to avatar
  */
 
 const ResponsiveAppBar = () => {
-  const { user, setAccessToken } = useUser();
+  const { user, accessToken, setAccessToken } = useUser();
+  const navigate = useNavigate()
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
   const handleCloseLogerMenu = () => {
-    setAccessToken(null);
+    logout(accessToken, (data) => {setAccessToken(null); navigate("/login");});
     handleCloseUserMenu();
   };
 
   const settings = [
     {
-      text: 'Usuario',
-      func: () => window.location.href = '/user',
-    },
-    {
       text: 'Inicio',
       func: () => window.location.href = '/home',
     },
     {
-      text: 'Salir',
+      text: 'Perfil',
+      func: () => window.location.href = '/user',
+    },
+    {
+      text: 'Cerrar sesión',
       func: () => handleCloseLogerMenu(),
     },
   ];
@@ -110,4 +113,5 @@ const ResponsiveAppBar = () => {
     </AppBar>
   );
 };
+
 export default ResponsiveAppBar;

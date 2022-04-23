@@ -1,5 +1,11 @@
 @import '_variables.scss',
-        'components/app-bar/index.scss';
+        'components/app-bar/index.scss',
+        'components/loading/index.scss',
+        'components/login/index.scss',
+        'components/signin/index.scss',
+        'components/dataTable/index.scss',
+        'pages/meet/index.scss',
+        'pages/home/highlight/index.scss';
 
 body {
   margin: 0 auto;
@@ -13,4 +19,8 @@ body {
 
 .MuiAvatar-root.MuiAvatar-circular.MuiAvatar-colorDefault {
   background-color: $secun-color!important;
+}
+
+div#country {
+  text-align: left;
 }

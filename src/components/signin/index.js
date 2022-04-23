@@ -9,11 +9,16 @@ import {
 } from '@material-ui/core';
 import withStyles from '@material-ui/core/styles/withStyles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import React, { useState } from 'react';
-import { useUser } from '../../hooks/use-user';
 import { signin as signinCall } from '../../services';
-import MenuItem from "@mui/material/MenuItem";
-import {Select} from "@mui/material";
+import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@material-ui/core";
+import { Navigate } from "react-router-dom";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
 
 const styles = theme => ({
   main: {
@@ -53,22 +58,39 @@ function Signin(props) {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [password, setPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [country, setCountry] = useState('');
-  const { setAccessToken } = useUser();
+  const [country, setCountry] = useState('AR');
   const { classes } = props;
- 
-  async function createUser() {
-    signinCall(firstname, lastname, email, password, phoneNumber, country, (data) => {
+  const [error, setError] = useState('');
+  const [open, setOpen] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [goToLogin, setGoToLogin] = React.useState(false);
 
-    });
+  const handleClose = () => {
+    setOpen(false);
   };
 
+  async function createUser() {
+    signinCall(firstname, lastname, email, password, phoneNumber, country, (data) => {
+      if (!data || !data.id) {
+        let errors = Object.keys(data);
+        if (errors.length === 1) {
+          setError("El campo " + Object.keys(data).join() + " no es válido");
+        } else {
+          setError("Los campos " + Object.keys(data).join() + " no son válidos");
+        }
+        setOpen(true);
+      } else {
+        // Se registro correctamente y lo llevo a login
+        setGoToLogin(true);
+      }
+    });
+  };
 
   function handleEmailChange(event) {
     setEmail(event.target.value);
   }
-
   function handleFirstname(event) {
     setFirstname(event.target.value);
   }
@@ -76,23 +98,51 @@ function Signin(props) {
   function handleLastname(event) {
     setLastname(event.target.value);
   }
- 
+
   function handlePasswordChange(event) {
     setPassword(event.target.value);
   }
- 
-  function handlePhoneNumbere(event) {
-    setPhoneNumber(event.target.value);
+
+  function handleRepeatedPasswordChange(event) {
+    setRepeatPassword(event.target.value);
   }
- 
+
+  function handlePhoneNumber(event) {
+    const re = /^[0-9,\-,+, ]+$/g;
+    if (event.target.value === '' || re.test(event.target.value)) {
+      setPhoneNumber(event.target.value);
+    }
+  }
+
   function handleCountry(event) {
     setCountry(event.target.value);
   }
- 
+
   function handleFormSubmit(event) {
     event.preventDefault();
-    createUser();
-  } 
+    if (password.length >= 6 && password === repeatPassword) {
+      createUser();
+    } else if (!(password === repeatPassword)) {
+      setError("El campo Contraseña y Repetir Contraseña no coinciden");
+      setOpen(true);
+    } else if (password.length <= 6) {
+      setError("La contraseña debe tener por lo menos seis caracteres");
+      setOpen(true);
+    }
+  }
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  if (goToLogin) {
+    return <Navigate to="/login"/>
+  }
+
   return (
     <main className={classes.main}>
       <Paper className={classes.paper}>
@@ -143,24 +193,17 @@ function Signin(props) {
               name="phoneNumber"
               autoComplete="phoneNumber"
               autoFocus
-              onChange={handlePhoneNumbere}
+              onChange={handlePhoneNumber}
               value={phoneNumber}
               rows="number"
             />
             </FormControl>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="country">País</InputLabel>
-            <Input
-              name="country"
-              type="country"
-              id="country"
-              autoComplete="country"
-              onChange={handleCountry}
-              value={country}
-            />
             <Select name="country"
                     type="country"
                     id="country"
+                    input={<Input />}
                     autoComplete="country"
                     onChange={handleCountry}
                     value={country}
@@ -405,11 +448,45 @@ function Signin(props) {
             <InputLabel htmlFor="password">Contraseña</InputLabel>
             <Input
               name="password"
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               id="password"
               autoComplete="current-password"
               onChange={handlePasswordChange}
               value={password}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="repeat-password">Repetir Contraseña</InputLabel>
+            <Input
+                error={(repeatPassword !== password)}
+                name="repeat-password"
+                type={showPassword ? 'text' : 'password'}
+                id="repeat-password"
+                autoComplete="password"
+                onChange={handleRepeatedPasswordChange}
+                value={repeatPassword}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
             />
           </FormControl>
           <Button
@@ -423,6 +500,24 @@ function Signin(props) {
           </Button>
         </form>
       </Paper>
+      <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle className={'dialog-title'} id="alert-dialog-title">{"Atención"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText className={'dialog-content'}  id="alert-dialog-description">
+            {`${error}`}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button className={'dialog-button'} onClick={handleClose} autoFocus>
+            Cerrar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </main>
   );
 }

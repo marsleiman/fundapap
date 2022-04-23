@@ -1,0 +1,118 @@
+.parent_h_highlight {
+  padding: 5px;
+}
+
+a.button_redirect {
+  width: 350px;
+  background: $main-color;
+  display: block;
+  margin: 20px auto 0;
+  padding: 10px 0;
+  border-radius: 4px;
+  color: $white-color;
+  text-decoration: none;
+  font-size: 0.875rem;
+  min-width: 64px;
+  box-sizing: border-box;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+}
+
+.parent_div_highlight {
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+.parent_h_highlight {
+    padding: 30px;
+    max-width: 500px;
+    width: 500px;
+    margin: 0 auto;
+    border-radius: 4px;
+    box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 30%), 0px 1px 1px 0px rgb(0 0 0 / 20%), 0px 1px 3px 0px rgb(0 0 0 / 18%);
+}
+
+h2.child_h3_highlight {
+  font-size: 1.5rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1.334;
+  letter-spacing: 0em;
+  margin: 10px;
+}
+
+h3.child_h4_highlight {
+  background-color: $secun-color;
+  color: $white-color;
+  font-size: 1.5rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1.334;
+  letter-spacing: 0em;
+  margin: 10px;
+}
+
+h2.calendar__title {
+  font-size: 1.3rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1.334;
+  letter-spacing: 0em;
+  padding-top: 20px;
+  border-width: 0;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.12);
+  border-bottom-width: thin;
+  padding-bottom: 21px;
+}
+
+.calendar__table-next-meets {
+  border-radius: 4px;
+  background: #fff;
+  margin: 0 auto;
+  width: 530px;
+  margin-top: 50px;
+  padding-bottom: 3px;
+}
+
+li.MuiDivider-root.MuiDivider-inset.css-uls1yk-MuiDivider-root {
+  margin-left: 0!important;
+}
+
+ul.MuiList-root.MuiList-padding.css-1mcnwpj-MuiList-root {
+  max-width: 100%;
+}
+
+li.MuiListItem-root.MuiListItem-gutters.MuiListItem-padding.MuiListItem-alignItemsFlexStart.css-hhvo2v-MuiListItem-root {
+  text-align: center;
+}
+
+.calendar__container {
+  margin-top: 30px!important;
+  padding-top: 20px;
+  background-color: $secun-color;
+  padding-bottom: 100px;
+}
+
+@media (max-width: 768px) {
+  .parent_h_highlight {
+    max-width: 100%;
+    width: 100%;
+    padding: 20px 5px;
+    margin: 0 auto;
+  }
+
+  .calendar__table-next-meets {
+    width: 80%;
+    max-width: 80%;
+  }
+
+  a.button_redirect {
+    width: 70%;
+    max-width: 70%;
+  }
+}
