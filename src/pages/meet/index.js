@@ -22,7 +22,7 @@ function Meet() {
   }, []);
 
 
-  if (!user && !user.name) {
+  if (!user || !user.name) {
     return ''
   } else  if (apiData === undefined) { // Aun no cargo la api y hay que esperar
     return <Loading />
@@ -35,13 +35,9 @@ function Meet() {
     } else {
       meeting = <>
         <img src={"/image1.jpg"} style={{height: '150px', width: '100%', objectFit: 'cover'}} alt={"Imagen"}/>
-        <h2>{apiData.meeting.title}</h2>
-        <h3>{apiData.meeting.description}</h3>
-        <a target="_blank" href={apiData.meeting.link}>
-          <Button variant="contained" color="primary">
-            Link a la reunión
-          </Button>
-        </a>
+        <h2 className="meet-link-title">{apiData.meeting.title}</h2>
+        <span className="child_h4_highlight">{apiData.meeting.description}</span>
+        <a className="meet-link" target="_blank" href={apiData.meeting.link}>Link a la reunión</a>
       </>
     }
 

@@ -19,7 +19,7 @@ export default function Home() {
   }, []);
 
   const render = () => {
-    if (!user && !user.name) { //No esta logueado
+    if (!user || !user.name) { //No esta logueado
       return <Navigate to="/login"/>
     } else if (apiData === undefined) { // Aun no cargo la api y hay que esperar
       return <Loading />

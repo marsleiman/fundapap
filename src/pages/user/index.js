@@ -19,13 +19,12 @@ export default function UserPage() {
 
   const TableMeets = () => {
     if (apiData && apiData.meetings) {
-      let title = "Reuniones en las que haz participado";
       let headers = [{
         id: 'title',
-        title: 'Reuniones'
+        title: 'Reuniones en las que haz participado'
       }];
 
-      return <DataTable title={title} columns={headers} data={apiData.meetings} />;
+      return <DataTable columns={headers} data={apiData.meetings} />;
     } else {
       return '';
     }

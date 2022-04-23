@@ -55,8 +55,8 @@ function DataTable(props) {
     )});
 
     return (
+      <div className="content-data-table">
         <Paper className={classes.root}>
-            <h3>{props.title}</h3>
             <TableContainer component={Paper}>
                 <Table className={classes.table} size="small" aria-label="simple table">
                     <TableHead>
@@ -79,6 +79,7 @@ function DataTable(props) {
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
         </Paper>
+      </div>
     );
 }
 
