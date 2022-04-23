@@ -24,7 +24,7 @@ export default function Home() {
     } else if (apiData === undefined) { // Aun no cargo la api y hay que esperar
       return <Loading />
     } else { 
-      // Actual meeting
+    // Actual meeting
       let meetingMessage;
       if (apiData.current && apiData.current.length === 0) {
         let title = `Actualmente no hay ninguna reunión en curso`;
@@ -33,7 +33,10 @@ export default function Home() {
       } else {
         // Textos de current meet
         let current = apiData.current[0];
-        meetingMessage = <Highlight title={current.title} subtitle={'Puedes unirte a la reunión presionando en el siguiente boton'}
+        meetingMessage = <Highlight 
+          title={'Próxima reunión'}
+          subtitle={current.title}
+          text={'Puedes unirte a la reunión presionando en el siguiente boton'}
           button={{
             text: "Ir a la reunión",
             href: `/meet/${current.code}`,
