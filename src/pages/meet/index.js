@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import { useUser } from '../../hooks/use-user';
 import {useParams} from "react-router-dom";
 import {getMeeting} from "../../services";
-import {Button} from "@mui/material";
 import Loading from "../../components/loading";
 import DataTable from "../../components/dataTable";
 

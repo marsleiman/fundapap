@@ -6,45 +6,12 @@ import {
   InputLabel,
   Paper,
   Typography,
-} from '@material-ui/core';
-import withStyles from '@material-ui/core/styles/withStyles';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+} from '@mui/material';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import React, { useState } from 'react';
 import { useUser } from '../../hooks/use-user';
 import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Link} from '@mui/material';
 import {login} from '../../services';
-
-const styles = theme => ({
-  main: {
-    width: 'auto',
-    display: 'block', // Fix IE 11 issue.
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-      width: 400,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
-  },
-  paper: {
-    marginTop: theme.spacing.unit * 8,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-  },
-  avatar: {
-    margin: theme.spacing.unit,
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing.unit,
-  },
-  submit: {
-    marginTop: theme.spacing.unit * 3,
-  },
-});
  
 function Login(props) {
   const [error, setError] = useState(undefined);
@@ -91,15 +58,15 @@ function Login(props) {
     ingresar();
   } 
   return (
-    <main className={classes.main}>
-      <Paper className={classes.paper}>
-        <Avatar className={classes.avatar}>
+    <main className={'mig-classes-main'}>
+      <Paper className={'mig-classes-paper'}>
+        <Avatar className={'mig-classes-avatar'}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Ingresar
         </Typography>
-        <form className={classes.form} onSubmit={handleFormSubmit}>
+        <form className={'mig-classes-form'} onSubmit={handleFormSubmit}>
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="email">Email</InputLabel>
             <Input
@@ -126,7 +93,7 @@ function Login(props) {
             type="submit"
             fullWidth
             variant="contained"
-            className={`${classes.submit} login__principal-buton`}
+            className={'mig-classes-submit login__principal-buton'}
           >
             Ingresar
           </Button>
@@ -165,4 +132,4 @@ function Login(props) {
   );
 }
  
-export default withStyles(styles)(Login);
+export default Login;

@@ -5,7 +5,7 @@
 
   .makeStyles-head-2 {
     background-color: $secun-color!important;
-    color: $white-color;
+    color: $white-color !important;
     font-size: 1.5rem!important;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif!important;
   }
@@ -38,7 +38,7 @@
     line-height: 1.334!important;
     letter-spacing: 0em;
     margin: 10px;
-    color: $white-color;
+    color: $white-color !important;
   }
   
   td.MuiTableCell-root.MuiTableCell-body.MuiTableCell-alignCenter.MuiTableCell-sizeSmall {

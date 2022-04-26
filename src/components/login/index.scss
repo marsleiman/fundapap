@@ -12,3 +12,35 @@ button.MuiButtonBase-root.MuiButton-root.MuiButton-text.dialog-button {
   width: 100%;
   margin-top: 30px;
 }
+
+.mig-classes-main {
+  //width: auto;
+  display: block; // Fix IE 11 issue.
+  //margin-left: 24px;
+  //margin-right: 24px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mig-classes-paper {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 24px 24px;
+}
+
+.mig-classes-avatar {
+  margin: 8px;
+  //background-color: theme.palette.secondary.main,
+}
+
+.mig-classes-form {
+  width: 100%; // Fix IE 11 issue.
+  margin-top: 8px;
+}
+
+.mig-classes-submit {
+  margin-top: 24px;
+}
