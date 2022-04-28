@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useUser } from '../../hooks/use-user';
-import {useParams} from "react-router-dom";
-import {getMeeting} from "../../services";
-import {Button} from "@mui/material";
+import { useParams } from "react-router-dom";
+import { getMeeting } from "../../services";
 import Loading from "../../components/loading";
 import DataTable from "../../components/dataTable";
 
@@ -16,7 +15,6 @@ function Meet() {
       getMeeting(accessToken,
           uuid,
           (data) => setApiData(data)
-          //() => true // Comentar arriba y descomentar aca para ver loading
       );
     }
   }, []);

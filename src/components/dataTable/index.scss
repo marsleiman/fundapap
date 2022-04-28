@@ -3,7 +3,7 @@
     margin: 50px auto 0;
   }
 
-  .makeStyles-head-2 {
+  th.MuiTableCell-root.MuiTableCell-head.MuiTableCell-alignCenter.MuiTableCell-sizeSmall {
     background-color: $secun-color!important;
     color: $white-color;
     font-size: 1.5rem!important;
@@ -28,8 +28,7 @@
     margin: 50px auto 0;
   }
   
-  .makeStyles-head-2,
-  tr.MuiTableRow-root.MuiTableRow-head {
+  th.MuiTableCell-root.MuiTableCell-head.MuiTableCell-alignCenter.MuiTableCell-sizeSmall {
     background-color: $secun-color!important;
     height: 50px;  
     font-size: 1.5rem!important;

@@ -1,6 +1,3 @@
-import { makeStyles } from '@material-ui/core/styles';
-import indigo from '@material-ui/core/colors/indigo';
-import blueGrey from '@material-ui/core/colors/blueGrey';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,28 +5,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TableContainer from "@material-ui/core/TableContainer";
-import {TablePagination} from "@mui/material";
+import { TablePagination } from "@mui/material";
 import React from "react";
 
-const useStyles = makeStyles({
-    root: {
-        width: '100%',
-        overflowX: 'auto',
-        padding: '3px',
-        margin: '2px',
-    },
-    head: {
-        backgroundColor: indigo[700],
-        color: blueGrey[50],
-    },
-    table: {
-        minWidth: 350,
-    },
-});
-
 function DataTable(props) {
-    const classes = useStyles();
-
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -43,7 +22,7 @@ function DataTable(props) {
     };
 
     let headers = <TableRow>
-            {props.columns.map((col) => <TableCell className={classes.head} align="center">{col.title}</TableCell>)}
+            {props.columns.map((col) => <TableCell align="center">{col.title}</TableCell>)}
         </TableRow>
 
     let rowsItems = props.data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => { return (
@@ -56,9 +35,9 @@ function DataTable(props) {
 
     return (
       <div className="content-data-table">
-        <Paper className={classes.root}>
+        <Paper>
             <TableContainer component={Paper}>
-                <Table className={classes.table} size="small" aria-label="simple table">
+                <Table size="small" aria-label="simple table">
                     <TableHead>
                         {headers}
                     </TableHead>

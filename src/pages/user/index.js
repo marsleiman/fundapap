@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { useUser } from '../../hooks/use-user';
-import {meetingHistory} from "../../services";
+import { meetingHistory } from "../../services";
 import DataTable from "../../components/dataTable";
 
 export default function UserPage() {
