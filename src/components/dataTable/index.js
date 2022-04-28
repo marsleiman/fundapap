@@ -37,7 +37,7 @@ function DataTable(props) {
       <div className="content-data-table">
         <Paper>
             <TableContainer component={Paper}>
-                <Table size="small" aria-label="simple table">
+                <Table>
                     <TableHead>
                         {headers}
                     </TableHead>

@@ -89,6 +89,13 @@ ul.MuiList-root.MuiList-padding.css-1mcnwpj-MuiList-root {
 
 li.MuiListItem-root.MuiListItem-gutters.MuiListItem-padding.MuiListItem-alignItemsFlexStart.css-hhvo2v-MuiListItem-root {
   text-align: center;
+  list-style: none;
+  padding: 15px 0;
+  border-width: 0;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.12);
+  border-bottom-width: thin;
+  margin-left: -40px;
 }
 
 .calendar__container {
